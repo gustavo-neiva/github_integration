@@ -135,8 +135,8 @@ Authorization:JSON_WEB_TOKEN_HASH
               "stars": null,
               "forks": null,
               "author": "mojombo"
-          },
-          ...
+          }
+      ]
     }
     ```
 * **Error Response:**
@@ -169,8 +169,8 @@ Authorization:JSON_WEB_TOKEN_HASH
                 "stars": 0,
                 "forks": 0,
                 "author": "gustavoneiva"
-            },
-            ...
+            }
+        ]
     }
     ```
 * **Error Response:**
@@ -217,8 +217,7 @@ Authorization:JSON_WEB_TOKEN_HASH
                 "stars": 220,
                 "forks": 40,
                 "author": "davidgohel"
-            },
-            ...
+            }
         ]
     }
     ```
