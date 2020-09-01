@@ -30,12 +30,14 @@ $ rails db:create
 $ rails db:migrate
 $ rails s
 ```
-Assim o servidor comecara a expor a API no localhost na porta 3000.
+Assim o servidor começará a expor a API no localhost na porta 3000.
 
 ## Paginação
 
 Para o sistema de paginação da API, eu me aproveitei da própria API do Github que fornece os links direto no header das respostas, dentro da chave `links`, portanto continuei enviando nos headers os links para as próximas páginas mas também envio no corpo da requisição para ter uma visualização mais fácil. Os links no header vão no seguinte formato:
 `</api/v1/search/repositories?q=farming&page=2>; rel="next", </api/v1/search/repositories?q=farming&page=34>; rel="last"`
+
+Também envio os links das paginas dentro do corpo da resposta, na chave de `metadata`.
 
 ### Testes
 
@@ -58,7 +60,6 @@ Authorization:JSON_WEB_TOKEN_HASH
 ```
 ## TO DO
 - Melhorar a cobertura dos testes, principalmente nos casos de exceções de integração mas também cobrindo todos os objetos Ruby puros com testes unitários.
-- Dockerizar o projeto
 
 ## Documentação da API
 
