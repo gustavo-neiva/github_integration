@@ -1,6 +1,6 @@
 module Api
   module V1
-    class UserController < BaseController
+    class UsersController < BaseController
       before_action :authorize_request, except: :create
       before_action :find_user, except: :create
 
