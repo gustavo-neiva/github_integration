@@ -11,8 +11,8 @@ RSpec.describe Api::V1::RepositoriesController, :type => :controller do
         request.headers.merge!(authenticated_header(current_user))
         VCR.use_cassette('controllers/api/v1/repositories_controller/list_repositories') do
           get :index
-          expect(response.headers).to have_key("link")
           expect(response.status).to eq(200)
+          expect(response.headers).to have_key("link")
         end
       end
     end
@@ -22,8 +22,8 @@ RSpec.describe Api::V1::RepositoriesController, :type => :controller do
         request.headers.merge!(authenticated_header(current_user))
         VCR.use_cassette('controllers/api/v1/repositories_controller/list_repositories_since') do
           get :index, params: { since: 42 }
-          expect(response.headers).to have_key("link")
           expect(response.status).to eq(200)
+          expect(response.headers).to have_key("link")
         end
       end
     end
