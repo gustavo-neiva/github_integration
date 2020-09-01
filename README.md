@@ -10,7 +10,8 @@ Também procurei seguir o modelo de arquitetura de portas e adaptadores, onde as
 
 No fundo esse aplicativo é uma camada de abstração para a API do Github, portanto acabei utilizando o padrão de recursos da API do GitHub e o sistema de paginação dela.
 
-Para o sistema de paginação da API, eu me aproveitei da própria API do Github que fornece os links direto no header das respostas, dentro da chave `links`, portanto continuei enviando nos headers os links para as próximas páginas mas também envio no corpo da requisição para ter uma visualização mais fácil.
+Para o sistema de paginação da API, eu me aproveitei da própria API do Github que fornece os links direto no header das respostas, dentro da chave `links`, portanto continuei enviando nos headers os links para as próximas páginas mas também envio no corpo da requisição para ter uma visualização mais fácil, sendo que o header vai no seguinte formato:
+`</api/v1/search/repositories?q=farming&page=2>; rel="next", </api/v1/search/repositories?q=farming&page=34>; rel="last"`
 
 Fiz o deploy desse projeto para o heroku que está no endereço:
 ```
@@ -67,7 +68,7 @@ Authorization:JSON_WEB_TOKEN_HASH
 * **Method:**
   `POST`
 *  **Body**
-    ```
+    ```JSON
     {
       "user": {
         "name": "Luiz Neiva",
@@ -92,7 +93,7 @@ Authorization:JSON_WEB_TOKEN_HASH
 * **Method:**
   `POST`
 *  **Body**
-    ```
+    ```JSON
     {
       "email": "luizgzn@gmail.com",
       "password": "123456"
@@ -117,7 +118,7 @@ Authorization:JSON_WEB_TOKEN_HASH
 * **Success Response:**
   * **Code:** 200
     **Content:**
-    ```
+    ```JSON
     {
       "metadata": {
           "next": "/api/v1/repositories?since=369",
@@ -151,7 +152,7 @@ Authorization:JSON_WEB_TOKEN_HASH
 * **Success Response:**
   * **Code:** 200
     **Content:**
-    ```
+    ```JSON
     {
         "metadata": {
             "next": "/api/v1/user/12118557/repos?page=2",
@@ -197,7 +198,7 @@ Authorization:JSON_WEB_TOKEN_HASH
 * **Success Response:**
   * **Code:** 200
     **Content:**
-    ```
+    ```JSON
     {
         "metadata": {
             "next": "/api/v1/search/repositories?q=farming&page=2",
