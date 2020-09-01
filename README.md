@@ -4,14 +4,9 @@ Esse projeto tem como objetivo a construção de uma api simples para realizar c
 
 ## Proposta de solução
 
-O projeto foi arquitetado seguindo alguns princípios do Domain Driven Design. Procurei separar toda a logica específica do negócio em objetos simples Ruby, com o objeto de modularizar a aplicação, facilitar a modelagem das funcionalidades especificas do negócio, diminuir o acoplamento entre a lógica de negócios e o framework em si e com isso facilitar uma possivel extração do módulo para outro serviço, caso seja pertinente, com uma relativa facilidade.
+O projeto foi arquitetado procurando seguir alguns princípios do Domain Driven Design. Separei a lógica do negócio em objetos simples Ruby, com o objetivo de modularizar a aplicação, diminuir o acoplamento entre o framework e o código prórpio para o problema de negócio.
 
-Também procurei seguir o modelo de arquitetura de portas e adaptadores, onde as interações entre as camadas de infraestutura e aplicação com a lógica de negócio ficam restrita a portas e adaptadores específicos como os casos de uso.
-
-No fundo esse aplicativo é uma camada de abstração para a API do Github, portanto acabei utilizando o padrão de recursos da API do GitHub e o sistema de paginação dela.
-
-Para o sistema de paginação da API, eu me aproveitei da própria API do Github que fornece os links direto no header das respostas, dentro da chave `links`, portanto continuei enviando nos headers os links para as próximas páginas mas também envio no corpo da requisição para ter uma visualização mais fácil, sendo que o header vai no seguinte formato:
-`</api/v1/search/repositories?q=farming&page=2>; rel="next", </api/v1/search/repositories?q=farming&page=34>; rel="last"`
+Esse aplicativo é uma camada de abstração para a API do Github, portanto acabei utilizando o padrão de recursos da API do GitHub e o sistema de paginação dela.
 
 Fiz o deploy desse projeto para o heroku que está no endereço:
 ```
@@ -37,6 +32,11 @@ $ rails s
 ```
 Assim o servidor comecara a expor a API no localhost na porta 3000.
 
+## Paginação
+
+Para o sistema de paginação da API, eu me aproveitei da própria API do Github que fornece os links direto no header das respostas, dentro da chave `links`, portanto continuei enviando nos headers os links para as próximas páginas mas também envio no corpo da requisição para ter uma visualização mais fácil. Os links no header vão no seguinte formato:
+`</api/v1/search/repositories?q=farming&page=2>; rel="next", </api/v1/search/repositories?q=farming&page=34>; rel="last"`
+
 ### Testes
 
 Construí tanto testes unitários para os objetos `ruby` puros quanto testes de integração para checar o funcionamento dos endpoints e controllers.
@@ -50,7 +50,9 @@ E apertar a tecla `Enter` que os testes rodarão automaticamente.
 Ou então pode-se chamar o comando `rspec` direto na raiz do projeto.
 
 ## Autenticação
-A API utiliza o padrão JWT para realizar a autenticação de usuários, portanto precisa-se estar em posse de um token válido para todos os request (exceto os de criar usuário e login), o token deve ser passado no header das requisições no seguinte formato
+A API utiliza o padrão JWT para realizar a autenticação de usuários, portanto precisa-se estar em posse de um token válido para todos os request (exceto os de criar usuário e login). O token tem uma vida útil de uma hora, portanto após esse período é necessário reautenticar o usuário para renovar o token. O período de duração de 1 hora foi uma decisão arbitrária que pode ser alterada.
+
+O token deve ser passado no header das requisições no seguinte formato:
 ```
 Authorization:JSON_WEB_TOKEN_HASH
 ```
@@ -58,11 +60,11 @@ Authorization:JSON_WEB_TOKEN_HASH
 - Melhorar a cobertura dos testes, principalmente nos casos de exceções de integração mas também cobrindo todos os objetos Ruby puros com testes unitários.
 - Dockerizar o projeto
 
-## Documentacao da API
+## Documentação da API
 
 **Create User**
 ----
- Cria um usuario novo
+ Cria um usuário novo
 * **URL**
   /api/v1/user
 * **Method:**
