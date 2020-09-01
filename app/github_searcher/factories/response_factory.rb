@@ -17,13 +17,19 @@ module Factories
       links = @headers_parser.links(headers)
       body = JSON.parse(rest_client_response.body)
       if body.is_a?(Hash)
-        total_count = body.slice!("items")
-        total_count = total_count.transform_keys(&:to_sym)
-        metadata = metadata.merge(total_count)
-        body = body["items"]
+        body = build_body_from_hash(body, metadata)
       end
       repositories = @repositories_mapper.map(body)
       Services::GithubIntegrationResponse.new(metadata: metadata, repositories: repositories, links: links)
+    end
+
+    private
+
+    def build_body_from_hash(body, metadata)
+      total_count = body.slice!("items")
+      total_count = total_count.transform_keys(&:to_sym)
+      metadata = metadata.merge(total_count)
+      body["items"]
     end
   end
 end
