@@ -9,6 +9,8 @@ module Api
           render json: { message: e.message }, status: :bad_request
         rescue RuntimeError => e
           render json: { errors: e.message }, status: :bad_request
+        rescue ActiveRecord::RecordNotFound => e
+          render json: { message: "User not found." }, status: :not_found
         end
       end
 
