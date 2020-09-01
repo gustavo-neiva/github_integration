@@ -182,6 +182,7 @@ Authorization:JSON_WEB_TOKEN_HASH
   api/v1/search/repositories?q=farming
   api/v1/search/repositories?q=farming+language:ruby&sort=stars&order=desc&page=2&per_page=30
 * **Parameters**
+
 | Nome     	| Tipo    	| Descrição                                                                                                            	|
 |----------	|---------	|----------------------------------------------------------------------------------------------------------------------	|
 | q        	| string  	| Texto a ser pesquisado. Pode-se adicionionar qualificadores como a linguagem concatenando +language:ruby por exemplo 	|
