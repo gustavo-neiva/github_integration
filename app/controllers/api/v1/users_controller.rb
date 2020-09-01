@@ -39,14 +39,14 @@ module Api
 
       def find_user
         begin
-          @user = User.find_by_username!(params[:_username])
+          @user = User.find(params[:id])
         rescue ActiveRecord::RecordNotFound
           render json: { message: 'User not found' }, status: :not_found
         end
       end
 
       def user_params
-        params.require(:user).permit(:name, :username, :email, :password)
+        params.require(:user).permit(:name, :username, :email, :password, :id)
       end
     end
   end
