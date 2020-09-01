@@ -43,16 +43,17 @@ Também envio os links das paginas dentro do corpo da resposta, na chave de `met
 
 Construí tanto testes unitários para os objetos `ruby` puros quanto testes de integração para checar o funcionamento dos endpoints e controllers.
 
-Utilizei o `rspec` para fazer os testes junto da gem `vcr` para salvar os requests feitos à API externa, e gem `guard` para pode fazer uma testagem rápida, ele roda os testes a cada alteração nos arquivos que estão sendo testados. Os testes estão todos localizados dentro da pasta `/spec` na raiz do projeto é só chamar o comando:
-```
-$ guard
-```
-E apertar a tecla `Enter` que os testes rodarão automaticamente.
+Utilizei o `rspec` para fazer os testes junto da gem `vcr` para salvar os requests feitos à API externa, e gem `guard` para pode fazer uma testagem rápida, ele roda os testes a cada alteração nos arquivos que estão sendo testados.
 
-Ou então pode-se chamar o comando `rspec` direto na raiz do projeto.
+Os testes estão todos localizados dentro da pasta `/spec` na raiz do projeto é só chamar o comando:
+```
+$ rspec
+```
+Ou então pode-se chamar o comando `guard` direto na raiz do projeto e depois pressionar a tecla `Enter` que os testes rodarão automaticamente.
+
 
 ## Autenticação
-A API utiliza o padrão JWT para realizar a autenticação de usuários, portanto precisa-se estar em posse de um token válido para todos os request (exceto os de criar usuário e login). O token tem uma vida útil de uma hora, portanto após esse período é necessário reautenticar o usuário para renovar o token. O período de duração de 1 hora foi uma decisão arbitrária que pode ser alterada.
+A API utiliza o padrão JWT para realizar a autenticação de usuários, portanto precisa-se estar em posse de um token válido para todos os request (exceto os de criar usuário e login). O token tem uma vida útil de uma hora, após esse período é necessário reautenticar o usuário para renovar o token. O período de duração de 1 hora foi uma decisão arbitrária que pode ser alterada.
 
 O token deve ser passado no header das requisições no seguinte formato:
 ```
